@@ -10,7 +10,7 @@ import numpy as np
 try:
     import gymnasium as gym
     from gymnasium import spaces
-except Exception:  # pragma: no cover - fallback for minimal smoke tests
+except Exception:  # pragma: no cover - fallback used by the smoke test
     try:
         import gym
         from gym import spaces
@@ -1197,7 +1197,7 @@ class JointMobilitySupportEnv(gym.Env):
                 )
             # Recovery signals, the local marginal-capability estimate, and
             # execution cost are already present in the per-region actor
-            # observation.  The minimal controlled baseline therefore adds
+            # observation.  This controlled policy therefore adds
             # no second analytical fusion stage and learns only N scores.
             actor_scores = raw
             raw_net_q = actor_scores
