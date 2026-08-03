@@ -1,0 +1,87 @@
+paper: paper03
+workspace: rls_cad
+experiment_name: rls_cad_main
+
+seed: 0
+method: graph_tmsbd_ppo
+mode: restore
+total_timesteps: 80000
+
+environment:
+  map_rows: 12
+  map_cols: 15
+  horizon_steps: 40
+  resource_budget: 1.0
+  scenario_id: emergency_wireless_access_backhaul_v1
+  profile: mixed
+  max_sparse_support_fraction: 0.12
+  tmsbd_tau_multiplier: 1.25
+  tmsbd_gamma_base: 0.0
+  tmsbd_gamma_scale: 1.0
+  tmsbd_gamma_bias: 0.75
+  tmsbd_gate_residual_scale: 0.25
+  tmsbd_descriptor_mix: 0.20
+  tmsbd_channel_prior_strength: 0.18
+  tmsbd_mu_scale: 0.20
+  tmsbd_mu_bias: 2.50
+  tmsbd_projection_min_contrast: 0.03
+  switch_penalty_weight: 0.002
+  route_damage_fraction: 0.20
+  min_effective_share: 0.001
+  lambda_zeta: 1.50
+  decoder_lambda_zeta: 1.50
+  reference_lambda_zeta: 1.50
+  arrival_base_rate: 0.06
+  arrival_coefficient_of_variation: 0.0
+  objective_weight_override: null
+  decoder_weight_override: null
+  tmsbd_gate_softmax_temperature: 1.0
+  topology_seed: 0
+  spatial_edge_drop_fraction: 0.0
+  edge_rewire_fraction: 0.0
+  route_edge_drop_fraction: 0.0
+  support_edge_drop_fraction: 0.0
+  role_relocation_fraction: 0.0
+  support_providers_per_target: 3
+
+training:
+  device: cpu
+  require_physical_gpu0: false
+  minimum_free_disk_gb: 0.0
+  training_seeds: [0, 1, 2, 3, 4]
+  checkpoint_selection: final
+  periodic_eval_freq: 10000
+  learning_rate: 0.00025
+  n_steps: 256
+  batch_size: 128
+  gamma: 0.99
+  gae_lambda: 0.95
+  clip_range: 0.20
+  ent_coef: 0.001
+  entropy_dimension_normalization: false
+  entropy_reference_action_dim: 15
+  training_progress_csv: true
+
+evaluation:
+  validation_seeds: [
+    10001, 10002, 10003, 10004, 10005,
+    10006, 10007, 10008, 10009, 10010
+  ]
+  test_seeds: [
+    20001, 20002, 20003, 20004, 20005, 20006, 20007, 20008, 20009, 20010,
+    20011, 20012, 20013, 20014, 20015, 20016, 20017, 20018, 20019, 20020,
+    20021, 20022, 20023, 20024, 20025, 20026, 20027, 20028, 20029, 20030,
+    20031, 20032, 20033, 20034, 20035, 20036, 20037, 20038, 20039, 20040,
+    20041, 20042, 20043, 20044, 20045, 20046, 20047, 20048, 20049, 20050,
+    20051, 20052, 20053, 20054, 20055, 20056, 20057, 20058, 20059, 20060,
+    20061, 20062, 20063, 20064, 20065, 20066, 20067, 20068, 20069, 20070,
+    20071, 20072, 20073, 20074, 20075, 20076, 20077, 20078, 20079, 20080,
+    20081, 20082, 20083, 20084, 20085, 20086, 20087, 20088, 20089, 20090,
+    20091, 20092, 20093, 20094, 20095, 20096, 20097, 20098, 20099, 20100
+  ]
+
+outputs:
+  export_static_env: true
+
+wandb:
+  use_wandb: false
